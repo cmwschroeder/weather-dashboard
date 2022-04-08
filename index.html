@@ -12,10 +12,29 @@
     <title>Weather Dashboard</title>
   </head>
   <body>
-      
+    <header>
+      <div class="jumbotron">
+        <h1 class="display-4">Weather Stuff</h1>
+      </div>
+    </header>
+      <div class="row m-1">
+        <div class="col-sm-2" id="button-div">
+          <form id="input-form">
+            <div class="form-group">
+              <label for="input-lookup-city">Search for a City: </label>
+              <input type="text" class="form-control" id="input-lookup-city">
+            </div>
+            <button type="submit" class="btn btn-primary">Submit</button>
+          </form>
+        </div> 
+        <div class="col-sm-10" id="weather-field">
+
+        </div>
+      </div> 
     
-    
-    
+      <script src="https://code.jquery.com/jquery-3.6.0.js"></script>
+      <script src="https://code.jquery.com/ui/1.13.1/jquery-ui.js"></script>
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.5.0/js/bootstrap.min.js"></script>
     <script src="./assets/js/script.js"></script>
   </body>
 </html>
