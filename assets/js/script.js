@@ -43,8 +43,14 @@ function populateWeather(city) {
     })
     .then(function (data) {
       console.log(data);
+      var currWeatherCard = $('<section>');
+      currWeatherCard.addClass("card p-3 col-12");
+      var hAndIcon = $('<div>');
+      hAndIcon.addClass("d-flex");
       var header = $('<h2>');
       header.text(city.replace("+", " ") + " (" + today.format("MM/DD/YYYY") + ")");
+      var img = $('<img>');
+      img.attr("src", "http://openweathermap.org/img/wn/" + data.weather[0].icon + ".png")
       var tempEl = $('<p>');
       tempEl.text("Temperature: " + data.main.temp + " °F");
       var humidEl = $('<p>');
@@ -60,13 +66,21 @@ function populateWeather(city) {
         console.log(data);
         var uvEl = $('<p>');
         uvEl.text("UV Index: " + data.current.uvi);
-        weatherDivEl.append(header);
-        weatherDivEl.append(tempEl);
-        weatherDivEl.append(humidEl);
-        weatherDivEl.append(windSpeedEl);
-        weatherDivEl.append(uvEl);
+        hAndIcon.append(header);
+        hAndIcon.append(img);
+        currWeatherCard.append(hAndIcon);
+        currWeatherCard.append(tempEl);
+        currWeatherCard.append(humidEl);
+        currWeatherCard.append(windSpeedEl);
+        currWeatherCard.append(uvEl);
+        weatherDivEl.append(currWeatherCard);
+        buildFiveDayForecast(city);
       });
     });
+}
+
+function buildFiveDayForecast(city) {
+  
 }
 
 cityFormEl.on("submit", citySubmit);
