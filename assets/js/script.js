@@ -162,7 +162,8 @@ function buildFiveDayForecast(data) {
     //start creating the div to hold this days weather
     var currDayDiv = $('<div>');
     currDayDiv.addClass("col-2 bg-primary m-2 rounded text-light");
-    var header = $('<h3>');
+    var header = $('<h4>');
+    header.addClass("text-break")
     header.text("(" + writtenDay.format("MM/DD/YYYY") + ")");
     var img = $('<img>');
     img.attr("src", "http://openweathermap.org/img/wn/" + data.daily[i].weather[0].icon + ".png");
