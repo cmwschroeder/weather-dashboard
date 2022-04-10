@@ -20,7 +20,11 @@ var citySubmit = function (event) {
     event.preventDefault();
     var currCity = cityNameEl.val();
     cityNameEl.val("");
-    addButton(currCity);
+    if(!pastSearches.includes(currCity)) {
+      pastSearches[pastSearches.length] = currCity;
+      localStorage.setItem("pastSearches", JSON.stringify(pastSearches));
+      addButton(currCity);
+    }
     populateWeather(currCity.replace(" ", "+"));
 }
 
@@ -159,8 +163,16 @@ function buildFiveDayForecast(data) {
  * This will add buttons for previous searches that were stored in local storage
  */
 function loadButtons() {
-  
+  pastSearches = JSON.parse(localStorage.getItem('pastSearches'));
+  if(pastSearches == null) {
+    pastSearches = [];
+  }
+  for(var i = 0; i < pastSearches.length; i++) {
+    addButton(pastSearches[i]);
+  }
 }
 
 cityFormEl.on("submit", citySubmit);
 buttonDivEl.on("click", ".btn", previousCity);
+
+loadButtons();

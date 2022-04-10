@@ -17,6 +17,8 @@
 | Javascript|    |
 | Jquery | https://jquery.com/ |
 | Bootstrap | https://getbootstrap.com/ |
+| Moment | https://momentjs.com/ |
+| OpenWeather API | https://openweathermap.org/ |
 
 ## Link
 
