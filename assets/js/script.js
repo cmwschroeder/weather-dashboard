@@ -51,9 +51,18 @@ function populateWeather(city) {
 
     fetch(requestUrl)
     .then(function (response) {
+      if (response.status === 404) {
+        var header = $('<h2>');
+        header.text("City was not found");
+        weatherDivEl.append(header);
+        return "";
+      }
       return response.json();
     })
     .then(function (data) {
+      if(data == "") {
+        return;
+      }
       //build the html element that will store the values for the current weather, get the data values from the api return
       //give classes to style through bootstrap
       var currWeatherCard = $('<section>');
