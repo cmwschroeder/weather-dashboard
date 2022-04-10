@@ -15,7 +15,8 @@ var pastSearches = [];
 /*
  * On submit of the form this function will get the value of the city
  * that the user is searching for and call functions to make a button and to 
- * populate the weather
+ * populate the weather. Only adds if it wasn't already added, also puts it in
+ * local storage.
  */
 var citySubmit = function (event) {
     event.preventDefault();
@@ -29,11 +30,19 @@ var citySubmit = function (event) {
     populateWeather(currCity.replace(" ", "+"));
 }
 
+/*
+ * This function gets called if we click on one of the buttons for the past searches. It functions
+ * the same as a submit button push but instead we don't have to add the button since it is already there
+ * so it will just populate the weather fields.
+ */
 var previousCity = function (event) {
     var currCity = $(event.currentTarget).text();
     populateWeather(currCity.replace(" ", "+"));
 };
 
+/*
+ * Adds a button for the city that was passed in
+ */
 function addButton(city) {
     var btn = $("<btn>");
     btn.addClass("btn btn-white mx-2 w-100 border border-dark");
@@ -49,8 +58,10 @@ function populateWeather(city) {
     var requestUrl = "https://api.openweathermap.org/data/2.5/weather?q=" + city + "&appid=" + apiKey + "&units=imperial";
     weatherDivEl.html("");
 
+    //fetch the cities current weather
     fetch(requestUrl)
     .then(function (response) {
+      //check if we get 404 back from the api request and tell user
       if (response.status === 404) {
         var header = $('<h2>');
         header.text("City was not found");
@@ -60,6 +71,7 @@ function populateWeather(city) {
       return response.json();
     })
     .then(function (data) {
+      //don't try to access data that doesn't exist
       if(data == "") {
         return;
       }
@@ -180,12 +192,19 @@ function loadButtons() {
   }
 }
 
+//Calls functions if buttons are clicked
 cityFormEl.on("submit", citySubmit);
 buttonDivEl.on("click", ".btn", previousCity);
+
+/*
+ * Listens for remove button click, if clicked will clear local storage and get rid of buttons
+ * on the page.
+ */
 removeButtonEl.on("click", function() {
   pastSearches = [];
   localStorage.setItem("pastSearches", JSON.stringify(pastSearches));
   buttonDivEl.html("");
 });
 
+//Initially loads buttons from local storage and adds to page
 loadButtons();
