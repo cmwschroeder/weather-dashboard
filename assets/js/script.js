@@ -4,6 +4,7 @@ var cityFormEl = $("#input-form");
 var cityNameEl = $("#input-lookup-city");
 var buttonDivEl = $("#button-div");
 var weatherDivEl = $("#weather-field");
+var removeButtonEl = $('#remove-button');
 
 //holds the current city whos weather should be displayed
 var apiKey = "1373a1914a26d8a7e9e30e10d307cd06";
@@ -115,8 +116,6 @@ function buildFiveDayForecast(data) {
   var dayOfYear = today.dayOfYear();
   var writtenDay;
 
-  console.log(data);
-
   var header = $("<h3>");
   header.addClass("col-12");
   header.text("5-Day Forecast: ");
@@ -174,5 +173,10 @@ function loadButtons() {
 
 cityFormEl.on("submit", citySubmit);
 buttonDivEl.on("click", ".btn", previousCity);
+removeButtonEl.on("click", function() {
+  pastSearches = [];
+  localStorage.setItem("pastSearches", JSON.stringify(pastSearches));
+  buttonDivEl.html("");
+});
 
 loadButtons();
