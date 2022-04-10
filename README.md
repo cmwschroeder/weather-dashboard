@@ -30,27 +30,22 @@ https://cmwschroeder.github.io/weather-dashboard/
 ## Usage
 
 On first load the webpage will be empty with nothing populated
-
-
+![Page on load](https://github.com/cmwschroeder/weather-dashboard/blob/main/assets/images/screenshot-one.png)  
 
 You can type in a city and press the submit button to get the current and future weather data for that city as well as add a button for easier lookup in the future.
-
-
+![Weather populated on page of Seattle](https://github.com/cmwschroeder/weather-dashboard/blob/main/assets/images/screenshot-two.png)  
 
 Successive searches will add more buttons to keep track of the past searches
-
-
+![Page with lots of past searches](https://github.com/cmwschroeder/weather-dashboard/blob/main/assets/images/screenshot-three.png)  
 
 On page reload, or just visiting the webpage later the buttons will remain
-
-
+![Empty weather field but still lots of buttons](https://github.com/cmwschroeder/weather-dashboard/blob/main/assets/images/screenshot-four.png)  
 
 You may click any button and it will perform the same search
-
-
+![Weather field full with atlanta data, a past search](https://github.com/cmwschroeder/weather-dashboard/blob/main/assets/images/screenshot-five.png)  
 
 On looking up something that openweather doesn't return results for, you will be informed
-
-
+![Page saying city not found](https://github.com/cmwschroeder/weather-dashboard/blob/main/assets/images/screenshot-six.png)  
 
 You may click the remove past searches at any time to get rid of all the buttons and remove past searches from local storage
+![Page with all buttons removed](https://github.com/cmwschroeder/weather-dashboard/blob/main/assets/images/screenshot-seven.png)  
