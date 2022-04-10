@@ -8,6 +8,8 @@ var weatherDivEl = $("#weather-field");
 //holds the current city whos weather should be displayed
 var apiKey = "1373a1914a26d8a7e9e30e10d307cd06";
 var today = moment();
+//loads this from local storage and fills so we have info on past searches
+var pastSearches = [];
 
 /*
  * On submit of the form this function will get the value of the city
@@ -34,6 +36,10 @@ function addButton(city) {
     buttonDivEl.append(btn);
 }
 
+/*
+ * This will populate the current weather with the data gotten from an api request, will build the html elements then append them to the
+ * page. Will then call the function to build the future weather conditions
+ */
 function populateWeather(city) {
     var requestUrl = "https://api.openweathermap.org/data/2.5/weather?q=" + city + "&appid=" + apiKey + "&units=imperial";
     weatherDivEl.html("");
@@ -43,6 +49,8 @@ function populateWeather(city) {
       return response.json();
     })
     .then(function (data) {
+      //build the html element that will store the values for the current weather, get the data values from the api return
+      //give classes to style through bootstrap
       var currWeatherCard = $('<section>');
       currWeatherCard.addClass("card p-3 col-12");
       var hAndIcon = $('<div>');
@@ -58,13 +66,31 @@ function populateWeather(city) {
       var windSpeedEl = $('<p>');
       windSpeedEl.text("Wind Speed: " + data.wind.speed + " MPH")
       requestUrl = "https://api.openweathermap.org/data/2.5/onecall?lat=" + data.coord.lat + "&lon=" + data.coord.lon + "&appid=" + apiKey + "&units=imperial";
+      //we don't have access to the weather later on or the uvi so we need to do a different fetch request using the lattitude and longitude we got from
+      //this past request
       fetch(requestUrl)
       .then(function (response) {
         return response.json();
       })
       .then(function (data) {
+        //create uv for the current weather
         var uvEl = $('<p>');
-        uvEl.text("UV Index: " + data.current.uvi);
+        //put uvi value in a span so we can color it seperately
+        var uvTextEl = $('<span>');
+        uvEl.text("UV Index: ");
+        uvTextEl.text(data.current.uvi);
+        //color the uvi based on the value, green if favorable, yellow if moderate, red if severe
+        if(data.current.uvi >= 0 && data.current.uvi < 3) {
+          uvTextEl.addClass("bg-success px-3 py-1");
+        }
+        else if(data.current.uvi >= 3 && data.current.uvi < 6) {
+          uvTextEl.addClass("bg-warning px-3 py-1");
+        }
+        else {
+          uvTextEl.addClass("bg-danger px-3 py-1");
+        }
+        //append everything and then append to page
+        uvEl.append(uvTextEl);
         hAndIcon.append(header);
         hAndIcon.append(img);
         currWeatherCard.append(hAndIcon);
@@ -73,6 +99,7 @@ function populateWeather(city) {
         currWeatherCard.append(windSpeedEl);
         currWeatherCard.append(uvEl);
         weatherDivEl.append(currWeatherCard);
+        //call function to go build the rest of the page
         buildFiveDayForecast(data);
       });
     });
@@ -126,6 +153,13 @@ function buildFiveDayForecast(data) {
     currDayDiv.append(humidEl);
     weatherDivEl.append(currDayDiv);
   }
+}
+
+/*
+ * This will add buttons for previous searches that were stored in local storage
+ */
+function loadButtons() {
+  
 }
 
 cityFormEl.on("submit", citySubmit);
