@@ -84,7 +84,7 @@ function populateWeather(city) {
       var header = $('<h2>');
       header.text(city.replace("+", " ") + " (" + today.format("MM/DD/YYYY") + ")");
       var img = $('<img>');
-      img.attr("src", "http://openweathermap.org/img/wn/" + data.weather[0].icon + ".png");
+      img.attr("src", "https://openweathermap.org/img/wn/" + data.weather[0].icon + ".png");
       var tempEl = $('<p>');
       tempEl.text("Temperature: " + data.main.temp + " °F");
       var humidEl = $('<p>');
@@ -166,7 +166,7 @@ function buildFiveDayForecast(data) {
     header.addClass("text-break")
     header.text("(" + writtenDay.format("MM/DD/YYYY") + ")");
     var img = $('<img>');
-    img.attr("src", "http://openweathermap.org/img/wn/" + data.daily[i].weather[0].icon + ".png");
+    img.attr("src", "https://openweathermap.org/img/wn/" + data.daily[i].weather[0].icon + ".png");
     var tempEl = $('<p>');
     tempEl.text("Temperature: " + data.daily[i].temp.day + " °F");
     var humidEl = $('<p>');
