@@ -50,6 +50,6 @@ On looking up something that openweather doesn't return results for, you will be
 You may click the remove past searches at any time to get rid of all the buttons and remove past searches from local storage
 ![Page with all buttons removed](https://github.com/cmwschroeder/weather-dashboard/blob/main/assets/images/screenshot-seven.png)  
 
-Here if is all in use:
+Here it is all in use:
 
 ![Gif of wepage working](./assets/gif/weather-dashboard.gif)
