@@ -1,3 +1,5 @@
+[![MIT license](https://img.shields.io/badge/License-MIT-blue.svg)](./LICENSE)
+
 # Weather Dashboard
 
 ## Description
@@ -10,6 +12,7 @@ This webpage uses 2 api calls to get the weather and uses JQuery in order to cre
 * [Technologies](#technologies)
 * [Link](#link)
 * [Usage](#usage)
+* [License](#license)
 
 ## Technologies
 
@@ -53,3 +56,7 @@ You may click the remove past searches at any time to get rid of all the buttons
 Here it is all in use:
 
 ![Gif of wepage working](./assets/gif/weather-dashboard.gif)
+
+## License
+
+Licensed under the [MIT License](LICENSE)
